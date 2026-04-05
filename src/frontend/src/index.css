@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Brand teal: #1A7E79 */
+    --brand-teal: 0.52 0.1 185;
+    /* Hero gradient teal: #0F7F7A → #0A6E6B */
+    --hero-teal-start: 0.49 0.11 185;
+    --hero-teal-end: 0.44 0.095 185;
+    /* Accent orange: #F4A23A */
+    --accent-orange: 0.76 0.16 65;
+    /* Dark slate: #22343B */
+    --dark-slate: 0.27 0.022 210;
+    /* Dark slate 2: #2C424A */
+    --dark-slate-2: 0.31 0.028 210;
+    /* Tile gray: #E9EEF2 */
+    --tile-gray: 0.94 0.01 220;
+    /* Text dark: #1E2A33 */
+    --text-dark: 0.23 0.022 220;
+
+    /* Semantic tokens */
+    --background: 1 0 0;
+    --foreground: 0.23 0.022 220;
+    --card: 1 0 0;
+    --card-foreground: 0.23 0.022 220;
+    --popover: 1 0 0;
+    --popover-foreground: 0.23 0.022 220;
+    --primary: 0.52 0.1 185;
+    --primary-foreground: 1 0 0;
+    --secondary: 0.94 0.01 220;
+    --secondary-foreground: 0.27 0.022 210;
+    --muted: 0.94 0.01 220;
+    --muted-foreground: 0.45 0.018 220;
+    --accent: 0.76 0.16 65;
+    --accent-foreground: 1 0 0;
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+    --border: 0.88 0.012 220;
+    --input: 0.88 0.012 220;
+    --ring: 0.52 0.1 185;
+    --chart-1: 0.52 0.1 185;
+    --chart-2: 0.76 0.16 65;
+    --chart-3: 0.27 0.022 210;
+    --chart-4: 0.94 0.01 220;
+    --chart-5: 0.44 0.095 185;
+    --sidebar: 0.985 0 0;
+    --sidebar-foreground: 0.23 0.022 220;
+    --sidebar-primary: 0.52 0.1 185;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.94 0.01 220;
+    --sidebar-accent-foreground: 0.27 0.022 210;
+    --sidebar-border: 0.88 0.012 220;
+    --sidebar-ring: 0.52 0.1 185;
+  }
+
+  .dark {
+    --background: 0.23 0.022 220;
+    --foreground: 0.94 0.01 220;
+    --card: 0.27 0.022 210;
+    --card-foreground: 0.94 0.01 220;
+    --popover: 0.31 0.028 210;
+    --popover-foreground: 0.94 0.01 220;
+    --primary: 0.76 0.16 65;
+    --primary-foreground: 0.23 0.022 220;
+    --secondary: 0.31 0.028 210;
+    --secondary-foreground: 0.94 0.01 220;
+    --muted: 0.31 0.028 210;
+    --muted-foreground: 0.65 0.015 220;
+    --accent: 0.52 0.1 185;
+    --accent-foreground: 1 0 0;
+    --destructive: 0.704 0.191 22.216;
+    --destructive-foreground: 0.985 0 0;
+    --border: 1 0 0 / 10%;
+    --input: 1 0 0 / 15%;
+    --ring: 0.52 0.1 185;
+    --sidebar: 0.27 0.022 210;
+    --sidebar-foreground: 0.94 0.01 220;
+    --sidebar-primary: 0.52 0.1 185;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.31 0.028 210;
+    --sidebar-accent-foreground: 0.94 0.01 220;
+    --sidebar-border: 1 0 0 / 10%;
+    --sidebar-ring: 0.52 0.1 185;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+
+  /* Gradient backgrounds */
+  .bg-hero-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.49 0.11 185) 0%,
+      oklch(0.44 0.095 185) 100%
+    );
+  }
+
+  .bg-game-card {
+    background: linear-gradient(
+      135deg,
+      oklch(0.27 0.022 210) 0%,
+      oklch(0.31 0.028 210) 100%
+    );
+  }
+
+  /* Cell path connection lines */
+  .path-cell {
+    position: relative;
+  }
+
+  /* No user select during drag */
+  .no-select {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Smooth tile transitions */
+  .tile-transition {
+    transition: background-color 0.15s ease, transform 0.1s ease;
+  }
+
+  /* Confetti particle animation */
+  @keyframes confetti-fall {
+    0% {
+      transform: translateY(-10px) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0.3);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.95);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      box-shadow: 0 0 0 0 oklch(0.76 0.16 65 / 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 10px oklch(0.76 0.16 65 / 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 oklch(0.76 0.16 65 / 0);
+    }
+  }
+
+  .animate-bounce-in {
+    animation: bounce-in 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+
+  .animate-pulse-ring {
+    animation: pulse-ring 1.5s ease-in-out infinite;
+  }
+
+  .confetti-piece {
+    animation: confetti-fall linear forwards;
+  }
+}
+
+/* Hint cell pulsing amber glow */
+@keyframes hint-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 8px oklch(0.85 0.18 85 / 0.5), 0 0 2px
+      oklch(0.85 0.18 85 / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px oklch(0.85 0.18 85 / 0.9), 0 0 8px
+      oklch(0.85 0.18 85 / 0.6);
+  }
+}
